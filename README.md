@@ -1,4 +1,4 @@
-For my boys (and girls?) at SC2: a simple sample Windows keylogger. Core functionality only.
+For my boys at the SC2: a simple sample Windows keylogger. Core functionality only.
 
 ## Known issues
 Outputs all printable characters in caps.
