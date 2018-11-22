@@ -1,7 +1,7 @@
 For my boys at the SC2: a simple sample Windows keylogger. Core functionality only.
 
 ## Known issues
-Outputs all printable characters in caps.
+- Outputs all printable characters in caps.
 
 My first Windows program. If there are issues, let me know.
 
