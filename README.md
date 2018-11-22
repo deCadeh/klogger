@@ -2,7 +2,6 @@ For my boys at the SC&C: a simple sample Windows keylogger. Core functionality o
 
 ## Known issues
 - Outputs all printable characters in caps
-- Have to fix output for Function keys
 
 My first Windows program. If there are issues, let me know.
 

