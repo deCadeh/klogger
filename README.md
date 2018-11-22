@@ -1,7 +1,7 @@
 For my boys at the SC&C: a simple sample Windows keylogger. Core functionality only.
 
 ## Known issues
-- Interspersed [shift]s
+- Interspersed `[shift]`s; considering removing `VK_LSHIFT` and `VK_RSHIFT` entirely
 
 My first Windows program. If there are issues, let me know.
 
