@@ -11,8 +11,8 @@ All common/printable keys should be mapped. Logic should be okay. Should probabl
 Runs as a process in the background (makes no other attempt to hide itself). Will keylog to a file of your choice (specified in klogger.h). Source code divided as such because of the expectation of future added functionality.
 
 ## Resources and documentation
-[Virtual-Key Codes](https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes)
-[Hooks](https://docs.microsoft.com/en-us/windows/desktop/winmsg/hooks)
+[Virtual-Key Codes](https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes)<br/>
+[Hooks](https://docs.microsoft.com/en-us/windows/desktop/winmsg/hooks)<br/>
 [SetWindowsHookEx function](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-setwindowshookexw)
 [LowLevelKeyboardProc callback function](https://msdn.microsoft.com/en-us/library/windows/desktop/ms644985(v=vs.85).aspx)
 [GetKeyState function](https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getkeystate)
