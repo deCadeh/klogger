@@ -10,6 +10,8 @@ All common/printable keys should be mapped. Logic should be okay. Should probabl
 ## Info
 Runs as a process in the background (makes no other attempt to hide itself). Will determine user directory with which to write .txt file. Source code divided as such because of the expectation of future added functionality.
 
+Note on net.c/net.h: Just wanted to learn WININET.
+
 ## Resources and documentation
 [Virtual-Key Codes](https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes)<br/>
 [Hooks](https://docs.microsoft.com/en-us/windows/desktop/winmsg/hooks)<br/>
