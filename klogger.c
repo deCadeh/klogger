@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "main.h"
 #include "klogger.h"
 #include "net.h"
 
