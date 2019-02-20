@@ -11,7 +11,7 @@ wchar_t lastWindowTitle[256];
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR szCmdLine, INT iCmdShow)
 {
-	MSG msg;;
+	MSG msg;
 
 	GetTargetUserDirectory(kbtestfile);
 	GetTargetPublicIp(kbpFile, kbtestfile);
